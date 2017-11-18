@@ -1,0 +1,9 @@
+%h1
+  Hello
+  - if user_signed_in?
+    = current_user.email
+  - else
+    World
+
+%p
+  Find me in app/views/welcome/index.html.erb

@@ -1,0 +1,23 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  %a.navbar-brand{:href => "#"}
+    LMS
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    - if user_signed_in?
+      %ul.navbar-nav.mr-auto
+        %li.nav-item{ class: current_page?(courses_path) ? "active" : "" }
+          = link_to "Courses", courses_path, class: "nav-link"
+        %li.nav-item{ class: current_page?(teachers_path) ? "active" : "" }
+          = link_to "Teachers", teachers_path, class: "nav-link"
+
+    %ul.navbar-nav.ml-auto
+      - if user_signed_in?
+        %li.nav-item
+          %a.nav-link
+            = current_user.email
+        %li.nav-item
+          = link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link")
+      - else
+        %li.nav-item
+          = link_to('Login', new_user_session_path, class: "nav-link")
